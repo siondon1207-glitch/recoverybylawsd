@@ -1,23 +1,693 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+   <style>
+        /* 기본 스타일 및 부드러운 색감 재설정 */
+        body {
+            font-family: 'Malgun Gothic', 'Dotum', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.85;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f8fa; /* 부드럽고 편안한 배경색 */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        /* 세련된 그래디언트 헤더 */
+        header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #ffffff;
+            padding: 50px 30px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(26, 54, 93, 0.12);
+            margin-bottom: 35px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.3em;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        header p {
+            margin: 15px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* 내비게이션 바 스타일 */
+        nav {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            margin-bottom: 35px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            flex-grow: 1;
+            text-align: center;
+        }
+        nav ul li a {
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: bold;
+            font-size: 1.05em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+        }
+
+        /* 메인 레이아웃 및 웹사이트 반응형 가변 패널 */
+        .content-wrap {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+        }
+        .main-content {
+            flex: 3;
+            min-width: 60%;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+        .sidebar {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        /* 사이드바 구성 카드 */
+        .sidebar-card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+        .sidebar-card h2 {
+            font-size: 1.35em;
+            color: #1a365d;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+        .sub-menu {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+        }
+        .sub-menu li {
+            margin-bottom: 8px;
+        }
+        .sub-menu li a {
+            display: block;
+            padding: 10px 14px;
+            text-decoration: none;
+            color: #4a5568;
+            border-radius: 6px;
+            border-left: 3px solid transparent;
+            transition: all 0.25s ease;
+            font-size: 0.95em;
+        }
+        .sub-menu li a:hover {
+            color: #2b6cb0;
+            font-weight: bold;
+            background-color: #f0f8ff;
+            border-left: 3px solid #2b6cb0;
+        }
+
+        /* 시각적 계층 구조가 명확한 본문 폰트 및 구조 */
+        h2 {
+            font-size: 1.8em;
+            color: #1a365d;
+            border-bottom: 3px solid #2b6cb0;
+            padding-bottom: 12px;
+            margin-top: 45px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.4em;
+            color: #2b6cb0;
+            margin-top: 35px;
+            border-bottom: 1px dashed #cbd5e0;
+            padding-bottom: 10px;
+        }
+        h4 {
+            font-size: 1.15em;
+            color: #4a5568;
+            margin-top: 25px;
+            border-left: 4px solid #4299e1;
+            padding-left: 15px;
+            font-weight: bold;
+        }
+
+        /* 강조 박스 스타일 */
+        .highlight-box {
+            background-color: #f7fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 6px solid #2b6cb0;
+            margin: 25px 0;
+            font-size: 1.05em;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+        }
+        .highlight-box strong {
+            color: #1a365d;
+        }
+        .highlight-accent {
+            background-color: #ebf8ff;
+            border-left: 6px solid #3182ce;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+        }
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.95em;
+        }
+        th {
+            background-color: #f7fafc;
+            color: #2d3748;
+            font-weight: bold;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* 목록 스타일 */
+        ul.custom-list, ol.custom-list {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        ul.custom-list li, ol.custom-list li {
+            margin-bottom: 10px;
+            line-height: 1.75;
+        }
+
+        /* 체류 시간 증진용 실시간 계산기 및 자가진단 폼 */
+        .interactive-form {
+            background-color: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            margin-top: 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+        }
+        .interactive-form h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #4a5568;
+            font-size: 0.95em;
+        }
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1em;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2b6cb0;
+        }
+        .form-group button {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        .form-group button:hover {
+            background-color: #1a365d;
+        }
+        .calc-result {
+            background-color: #ebf8ff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #bee3f8;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* 외부 링크 디자인 */
+        .external-links a {
+            color: #2b6cb0;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            transition: color 0.2s;
+        }
+        .external-links a:hover {
+            color: #1a365d;
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- JSON-LD 구조화 데이터 - 네이버 및 구글 검색 노출 최적화 (LLM 및 GEO 대응) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "청주개인회생 대전회생법원 관할 선택 가이드: 2026년 최신 최저생계비 변제금 분석",
+      "description": "2026년 청주개인회생 완벽 대비 가이드. 청주지방법원 및 신설된 대전회생법원 관할 선택 전략, 2026년 최저생계비(153만원) 기준 변제금 자가진단 계산기, 전문 변호사 수임료 및 진행 후기 등 필수 정보 총망라.",
+      "url": "https://www.example.com/cheongju-rehabilitation",
+      "lastReviewed": "2026-07-08",
+      "datePublished": "2026-07-08",
+      "inLanguage": "ko-KR",
+      "mainEntity": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "청주 거주자인데 대전회생법원으로 개인회생을 신청할 수 있나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "예, 가능합니다. 2026년 3월 1일 대전회생법원이 공식 개원함에 따라 개정된 법률에 의해 충청북도(청주지방법원 관할) 거주자 및 직장인도 대전회생법원에 선택적으로 개인회생을 접수할 수 있습니다. 이는 배우자 재산 산정이나 코인/주식 손실금 처리에서 압도적으로 유리한 지침을 적용받을 수 있는 기회입니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "2026년 개인회생 1인 가구 최저생계비는 얼마인가요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "2026년 기준 1인 가구 법정 최저생계비는 월 1,538,543원으로 책정되었습니다. 이는 전년 대비 약 7퍼센트 상향된 금액으로, 변제금 산정 시 본인의 소득에서 이 생계비를 제외한 나머지 금액이 매월 납부해야 하는 변제금으로 확정됩니다."
+            }
+          }
+        ]
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>청주개인회생 대전회생법원 관할 선택 전략 가이드</h1>
+            <p>2026년 최신 개정 지침 반영 - 최저생계비 기준 변제금 산정 및 자격 요건 분석</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#intro">개요 및 2026년 변화</a></li>
+                <li><a href="#court-compare">관할 법원 비교 선택</a></li>
+                <li><a href="#living-cost">최저생계비 기준</a></li>
+                <li><a href="#calculators">실시간 예상 계산기</a></li>
+                <li><a href="#legal-process">개인회생 절차 및 비용</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <!-- 사이드바 패널 -->
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h2>신뢰성 있는 법률 출처</h2>
+                    <div class="external-links">
+                        <a href="https://recoverybylawsa.koreahankang.com" target="_blank">전국 개인회생 법률 정보 네트워크 (ReliableDone)</a>
+                        <a href="https://namu.wiki/w/%EA%B0%9C%EC%9D%B8%ED%9A%8C%EC%83%9D" target="_blank">나무위키 - 개인회생 제도 개요</a>
+                        <a href="https://daejeon.scourt.go.kr/" target="_blank">대한민국 법원 대전회생법원</a>
+                        <a href="https://cheongju.scourt.go.kr/" target="_blank">대한민국 법원 청주지방법원</a>
+                        <a href="https://www.klac.or.kr/" target="_blank">대한법률구조공단 무료 법률 구조 지원</a>
+                        <a href=https://recoverybylawsd.koreahankang.com/" target="_blank">청주개인회생 채무조정제도 종합 안내</a>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h2>연령대별 회생 전략</h2>
+                    <ul class="sub-menu">
+                        <li><a href="#age-20">20대 청년층: 주식/코인 채무 탕감</a></li>
+                        <li><a href="#age-3040">3040 세대: 자녀 부양 및 주거 보존</a></li>
+                        <li><a href="#age-5060">55세 이상 장노년층: 생계 안정 중심</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 메인 콘텐츠 영역 -->
+            <div class="main-content">
+                <h2 id="intro">왜 2026년 청주개인회생이 완전히 달라졌는가</h2>
+                <div class="highlight-box">
+                    <p>청주개인회생 신청을 고민하시는 분들이 <strong>가장</strong> 먼저 확인해야 할 부분은 자신의 조건에서 매달 납부해야 하는 <strong>평균</strong> 변제 <strong>금액</strong>이 <strong>얼마</strong>가 될지 파악하는 것입니다. 특히 2026년은 충청 지역 채무자들에게 역사적인 해가 되었습니다. 바로 2026년 3월 1일, <strong>대전회생법원</strong>이 정식 개원했기 때문입니다. 이에 따라 기존 청주지방법원에만 접수할 수 있었던 충청북도 청주시(상당구, 흥덕구, 청원구, 서원구)를 비롯하여 충주, 제천, 진천, 음성 등 도내 거주자들도 이제 대전회생법원을 선택하여 신청할 수 있는 권한을 얻게 되었습니다.</p>
+                </div>
+                <p>이번 제도 변화는 단순한 행정 구역의 확장이 아닙니다. 도산 전문 법원인 대전회생법원은 일반 지방법원에 비해 매우 채무자 친화적인 보정 지침을 적용하므로, 청주 시민들이 어떤 법원을 선택하느냐에 따라 면책받는 <strong>예상</strong> 채무 탕감 규모와 월 <strong>비용</strong> 부담이 천차만별로 달라지게 됩니다.</p>
+
+                <h2 id="court-compare">청주지방법원 vs 대전회생법원: 관할 법원 비교의 핵심 차이점</h2>
+                <p>청주지방법원과 대전회생법원은 사건을 심리하는 방식과 기준에서 매우 뚜렷한 <strong>차이점</strong>을 보입니다. 두 법원의 <strong>장단점</strong>을 비교해보는 것이 나에게 맞춤형인 해결책을 찾는 데 <strong>제일</strong> 중요합니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>비교 항목</th>
+                            <th>기존 청주지방법원</th>
+                            <th>2026년 신설 대전회생법원</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>배우자 재산 반영</strong></td>
+                            <td>원칙적으로 배우자 명의 재산의 50퍼센트를 신청인의 청산가치에 강제 산입</td>
+                            <td>실질적 기여도가 증명되지 않는 한 배우자 명의 재산 산입 배제</td>
+                        </tr>
+                        <tr>
+                            <td><strong>주식 및 코인 손실금</strong></td>
+                            <td>손실금의 대부분을 청산가치에 반영하여 월 변제 금액 상향 유도</td>
+                            <td>실제 은닉한 정황이 없다면 단순 투자 손실은 청산가치 반영에서 제외</td>
+                        </tr>
+                        <tr>
+                            <td><strong>변제 기간 단축 특례</strong></td>
+                            <td>청년층이나 고령자 등 취약계층에 대한 24개월 변제 기간 단축 승인이 까다로움</td>
+                            <td>만 30세 미만 청년, 65세 고령자, 전세사기 피해자 등 24개월 단축 특례 적극 적용</td>
+                        </tr>
+                        <tr>
+                            <td><strong>사건 처리 속도</strong></td>
+                            <td>지방법원 고유 업무 혼재로 개시결정까지 통상 6개월에서 10개월 소요</td>
+                            <td>도산 전문 법원의 전담 회생위원 배치로 3개월에서 6개월 내 신속 종결</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box highlight-accent">
+                    <p><strong>전문가 분석 조언:</strong> 청산가치 산정이 까다로울수록 내가 매달 법원에 갚아야 하는 <strong>금액</strong>이 크게 늘어납니다. 따라서 소유한 자산이나 배우자의 자산이 많거나, 코인 및 주식 투자 실패로 채무가 누적된 이들은 청주지법 대신 대전회생법원으로 접수하는 것이 매달 납부할 변제금을 크게 낮춰 <strong>할인</strong>받는 것과 다름없는 효과를 가져다줍니다.</p>
+                </div>
+
+                <h2 id="living-cost">2026년 공식 법정 최저생계비 및 소득 기준</h2>
+                <p>개인회생 신청을 통해 채무를 조정하기 위해서는 법에 정해진 1인당 가구원수별 최저생계비를 올바르게 이해하고 이를 기반으로 변제금 <strong>계산</strong>을 진행해야 합니다. 보건복지부가 고시한 중위소득의 60퍼센트를 기준으로 산정되는 개인회생 최저생계비는 2026년 기준 역대 최대 폭으로 상향 조정되었습니다.</p>
+
+                <p>매월 내가 갚는 돈은 <strong>[월 평균 실수령 소득 - 최저생계비]</strong>의 공식으로 도출되므로, 생계비가 상향될수록 실제 갚아야 하는 돈은 감소하고 면책받는 탕감 <strong>혜택</strong>은 비약적으로 증가하게 됩니다.</p>
+
+                <ul>
+                    <li>1인 가구 최저생계비: 월 1,538,543원</li>
+                    <li>2인 가구 최저생계비: 월 2,519,575원</li>
+                    <li>3인 가구 최저생계비: 월 3,219,101원</li>
+                    <li>4인 가구 최저생계비: 월 3,903,150원</li>
+                </ul>
+
+                <h2 id="calculators">실시간 모의 시뮬레이터 및 자가진단 도구</h2>
+                <p>현재 감당하기 힘든 빚 독촉으로 고통을 겪고 계신다면, 법률 대행 <strong>업체</strong>를 무작정 방문하기 전에 아래의 자체 개발 <strong>계산기</strong>를 통해 내 상태를 미리 진단해보고 가용 변제금을 즉석에서 파악해보시는 것을 <strong>추천</strong>해 드립니다.</p>
+
+                <!-- 도구 1: 변제금 계산기 -->
+                <div class="interactive-form">
+                    <h3>1. 2026년형 개인회생 월 변제금 및 탕감액 간이 계산기</h3>
+                    <div class="form-group">
+                        <label for="monthly-income">매월 평균 세후 실수령 소득 (원 단위로 입력)</label>
+                        <input type="number" id="monthly-income" placeholder="예: 2500000" value="2500000">
+                    </div>
+                    <div class="form-group">
+                        <label for="household-size">인정받을 수 있는 총 부양가족 수 (본인 포함)</label>
+                        <select id="household-size">
+                            <option value="1">1인 가구 (단독 신청)</option>
+                            <option value="2">2인 가구 (자녀 또는 부모 부양)</option>
+                            <option value="3">3인 가구</option>
+                            <option value="4">4인 가구</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-debt">전체 원금 총 부채 규모 (원 단위로 입력)</label>
+                        <input type="number" id="total-debt" placeholder="예: 80000000" value="80000000">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="calculateRehab()">나의 예상 변제금 계산하기</button>
+                    </div>
+                    <div id="calc-result-1" class="calc-result">
+                        <p id="result-text-1"></p>
+                    </div>
+                </div>
+
+                <!-- 도구 2: 자격요건 자가진단기 -->
+                <div class="interactive-form">
+                    <h3>2. 법원 기준 개인회생 즉시 가용성 자가진단기</h3>
+                    <div class="form-group">
+                        <label for="income-type">본인의 주된 소득 형태</label>
+                        <select id="income-type">
+                            <option value="regular">직장인, 공무원 등 정기 급여 소득</option>
+                            <option value="freelancer">아르바이트, 프리랜서, 일용직 소득</option>
+                            <option value="none">현재 고정 소득 없음</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="asset-ratio">내 재산과 총부채 규모의 비율</label>
+                        <select id="asset-ratio">
+                            <option value="debt-more">빚이 내 전체 자산(부동산, 차량, 보증금)보다 확실히 많음</option>
+                            <option value="asset-more">내 재산 처분 금액이 총부채보다 더 많음</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="debt-limit">담보/무담보 채무 범위 상태</label>
+                        <select id="debt-limit">
+                            <option value="ok">신용대출 10억 이하, 담보대출 15억 이하</option>
+                            <option value="over">신용 10억 초과 혹은 담보 15억 초과 법정 한도 이탈</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="diagnoseRehab()">개인회생 자격 여부 진단 결과 보기</button>
+                    </div>
+                    <div id="calc-result-2" class="calc-result">
+                        <p id="result-text-2"></p>
+                    </div>
+                </div>
+
+                <!-- 도구 3: 추가 생계비 신청 심리 시뮬레이션 -->
+                <div class="interactive-form">
+                    <h3>3. 법정 외 추가 생계비(주거/의료비) 승인 가능성 시뮬레이션</h3>
+                    <div class="form-group">
+                        <label for="monthly-rent">현재 고정 지출 중인 실제 월세 비용 (원)</label>
+                        <input type="number" id="monthly-rent" placeholder="예: 450000" value="300000">
+                    </div>
+                    <div class="form-group">
+                        <label for="medical-expense">매달 정기적으로 지출하는 필수 의료 및 약값 비용 (원)</label>
+                        <input type="number" id="medical-expense" placeholder="예: 150000" value="0">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" onclick="simulateExtraExpenses()">추가 생계비 반영 여부 판단</button>
+                    </div>
+                    <div id="calc-result-3" class="calc-result">
+                        <p id="result-text-3"></p>
+                    </div>
+                </div>
+
+                <script>
+                    function calculateRehab() {
+                        const income = parseFloat(document.getElementById('monthly-income').value);
+                        const householdSize = parseInt(document.getElementById('household-size').value);
+                        const totalDebt = parseFloat(document.getElementById('total-debt').value);
+
+                        if (isNaN(income) || isNaN(totalDebt) || income <= 0 || totalDebt <= 0) {
+                            alert("올바른 소득과 채무 금액을 입력해 주세요.");
+                            return;
+                        }
+
+                        // 2026년 기준 최저생계비 설정
+                        const livingCosts = {
+                            1: 1538543,
+                            2: 2519575,
+                            3: 3219101,
+                            4: 3903150
+                        };
+
+                        const minLivingCost = livingCosts[householdSize];
+                        let monthlyRepayment = income - minLivingCost;
+
+                        if (monthlyRepayment <= 0) {
+                            document.getElementById('calc-result-1').style.display = 'block';
+                            document.getElementById('result-text-1').innerHTML = `
+                                현재 세후 소득(${income.toLocaleString()}원)이 가구원수별 최저생계비(${minLivingCost.toLocaleString()}원)보다 적습니다. 
+                                이 경우 일반적인 소득 기준으로는 개인회생 가입 및 진행이 어렵습니다. 
+                                부양가족 수를 1인 가구로 줄여 산정하거나 추가적인 아르바이트 등을 통해 소득을 상향 보완하는 방안을 변호사와 <strong>상담</strong>하셔야 합니다.
+                            `;
+                            return;
+                        }
+
+                        const defaultPeriod = 36; // 표준 3년 변제
+                        let totalRepayment = monthlyRepayment * defaultPeriod;
+
+                        if (totalRepayment > totalDebt) {
+                            totalRepayment = totalDebt;
+                            monthlyRepayment = totalDebt / defaultPeriod;
+                        }
+
+                        const dischargeAmount = totalDebt - totalRepayment;
+                        const dischargePercent = (dischargeAmount / totalDebt) * 100;
+
+                        document.getElementById('calc-result-1').style.display = 'block';
+                        document.getElementById('result-text-1').innerHTML = `
+                            <strong>2026년 기준 시뮬레이션 진단 결과:</strong><br>
+                            - 본인의 가구별 월 법정 최저생계비: <strong>${minLivingCost.toLocaleString()}원</strong><br>
+                            - <strong>예상 월 납부 변제금: ${Math.round(monthlyRepayment).toLocaleString()}원</strong><br>
+                            - 36개월 동안 납부할 총 상환 금액: <strong>${Math.round(totalRepayment).toLocaleString()}원</strong><br>
+                            - <strong>예상 면책 탕감액: ${Math.round(dischargeAmount).toLocaleString()}원 (탕감률: ${dischargePercent.toFixed(1)}%)</strong><br><br>
+                            본 견적은 기계적 산출 결과이며, 개별 자산 내역 및 법원 보정 권고 과정에 따라 실제 부과 금액은 변동될 수 있습니다. 
+                            반드시 실무 <strong>전문</strong> 변호사와의 다이렉트 <strong>컨설팅</strong>을 통해 서류 완성도를 높이셔야 합니다.
+                        `;
+                    }
+
+                    function diagnoseRehab() {
+                        const incomeType = document.getElementById('income-type').value;
+                        const assetRatio = document.getElementById('asset-ratio').value;
+                        const debtLimit = document.getElementById('debt-limit').value;
+
+                        document.getElementById('calc-result-2').style.display = 'block';
+
+                        if (incomeType === 'none') {
+                            document.getElementById('result-text-2').innerHTML = `
+                                <strong>진단 결과: 자격 요건 미달 우려</strong><br>
+                                개인회생은 반복적이고 확실한 장래의 소득 증명이 전제되어야 가입을 허용하는 제도입니다. 
+                                소득이 전혀 없다면 개인회생 진행이 불가능하므로, 일용직이나 주중 단기 파트타임 근무라도 구하셔서 신규 정기 수입을 소명할 자격 요건을 구축한 후 재신청해 보시기를 권장합니다.
+                            `;
+                        } else if (assetRatio === 'asset-more') {
+                            document.getElementById('result-text-2').innerHTML = `
+                                <strong>진단 결과: 법률상 기각 사유에 해당</strong><br>
+                                청산가치 보장의 원칙에 따라, 채무자의 모든 소유 재산을 즉시 처분한 가액보다 채무 원금이 더 적은 상황에서는 사법 구제 수단인 개인회생 신청이 전면 기각됩니다. 
+                                재산의 실질적 가치를 재평가하여 거품을 낮추거나 추가 신용 부채의 정확한 채무 내역을 재집계해 보셔야 합니다.
+                            `;
+                        } else if (debtLimit === 'over') {
+                            document.getElementById('result-text-2').innerHTML = `
+                                <strong>진단 결과: 개인회생 진행 한도 초과</strong><br>
+                                개인회생은 무담보 신용채무 10억 이하, 담보채무 15억 이하의 총 25억 한도 내에서만 한시적으로 신청 가능합니다. 
+                                한도를 초과하는 경우에는 대리인을 통해 일반회생 제도로 우회하여 진행하셔야 합니다.
+                            `;
+                        } else {
+                            document.getElementById('result-text-2').innerHTML = `
+                                <strong>진단 결과: 가입 자격 매우 확실 (안전)</strong><br>
+                                현재 안정적인 소득 요건과 확실한 재산 불균형 요건을 성실하게 만족하고 계십니다. 
+                                즉시 관련 서류를 일괄적으로 구비하셔서 청주지방법원 및 대전회생법원의 유리한 관할 지침에 알맞게 정밀 접수를 진행할 수 있는 단계입니다.
+                            `;
+                        }
+                    }
+
+                    function simulateExtraExpenses() {
+                        const rent = parseFloat(document.getElementById('monthly-rent').value) || 0;
+                        const med = parseFloat(document.getElementById('medical-expense').value) || 0;
+
+                        document.getElementById('calc-result-3').style.display = 'block';
+
+                        let housingAllowance = 0;
+                        if (rent > 200000) {
+                            housingAllowance = Math.min(rent - 150000, 350000);
+                        }
+
+                        let totalExtra = housingAllowance + med;
+
+                        if (totalExtra > 0) {
+                            document.getElementById('result-text-3').innerHTML = `
+                                <strong>추가 생계비 법원 심사 예측 결과:</strong><br>
+                                - 2026년 법원 실무 실태 지침상 예상되는 매달 추가 생계비 인정 승인액: <strong>약 ${totalExtra.toLocaleString()}원</strong><br><br>
+                                주거 비용의 임차 명의 소명 자료 및 실제 의료비 반복 지출 처방전을 세세하게 입증한다면, 기본 법정 한도를 넘어 추가 생계비가 통과될 수 있습니다. 
+                                이로 인해 매월 법원에 갚아야 하는 <strong>금액</strong>을 효과적으로 한 번 더 낮출 수 있습니다.
+                            `;
+                        } else {
+                            document.getElementById('result-text-3').innerHTML = `
+                                현재 고정 지출하시는 비용 요건으로는 법적 표준 생계비 외 별도 추가 수용을 요청하기 어렵습니다. 
+                                기본 법정 생계비 1인 가구 한도인 1,538,543원 내에서 알뜰한 지출 계획을 도출하는 정직한 전략이 효율적입니다.
+                            `;
+                        }
+                    }
+                </script>
+
+                <h2 id="legal-process">청주개인회생 상세 절차와 소요 비용 가이드</h2>
+                <p>개인회생은 스스로 법원에 직접 다이렉트로 신청 서류를 제출하는 방식도 가능하지만, 법률 전문 용어와 가혹한 채권 사 전수 조사로 인해 불이익을 당하지 않기 위해 대다수의 운전자나 직장인들은 공인된 전문 법률 <strong>업체</strong>에 업무를 수임하고 있습니다.</p>
+
+                <h3>개인회생이 진행되는 7단계 핵심 이정표</h3>
+                <ol class="custom-list">
+                    <li><strong>신청서 및 재산목록 일괄 접수:</strong> 채권자목록, 변제계획안, 소득 및 재산 소명 자료 준비.</li>
+                    <li><strong>금지명령 및 중지명령 통과:</strong> 신청서 접수일로부터 평균 3~7일 내에 채권추심, 독촉, 가압류 압박 전면 중단.</li>
+                    <li><strong>회생위원 면담 및 보정권고 이행:</strong> 채무 형성 경위, 주식 코인 거래 내역 세부 보정 명령에 성실히 답변.</li>
+                    <li><strong>개시결정 선고:</strong> 본인 명의 채무 변제용 법원 공식 계좌 신규 개설 및 변제금 선납입 개시.</li>
+                    <li><strong>채권자 집회 개최:</strong> 변제계획안에 불만을 품은 카드사, 은행 대리인이 이의 제기 여부를 타진하고 정해진 일자에 법원 출석.</li>
+                    <li><strong>변제계획 인가결정:</strong> 압류된 월급이나 통장의 압류 방지 해제가 가능해지며 신용등급 임시 조정.</li>
+                    <li><strong>3년~5년 납부 완료 및 면책결정:</strong> 최종 상환을 완료하고 남은 대출 원금과 연체 이자 전액 면책 탕감.</li>
+                </ol>
+
+                <h3>발생하는 실제 비용의 구조와 수임료 분석</h3>
+                <p>인터넷 및 다양한 온라인 <strong>사이트</strong>에서 수임료가 지나치게 <strong>싼곳</strong>이나 가장 <strong>저렴한곳</strong>으로 유명한 일부 허위 과장 대행소는 계약 후 뒤늦게 부가 보정 추가금이나 법원 납부 송달료를 청구하며 사기성 지출을 유도하곤 합니다. 반드시 종합적인 가격과 대면 상담 시의 진정성을 <strong>비교</strong>해봐야 합니다.</p>
+
+                <div class="highlight-box">
+                    <strong>예상 실 수임 비용 구성표 (2026년 청주 실무 단가 기준)</strong>
+                    <ul class="custom-list">
+                        <li>법무 법인 변호사 선임 수임료 가격: <strong>평균 150만원에서 220만원 선</strong> (기초수급자 등 취약가구 특별 <strong>할인</strong> 혜택 제공처 존재)</li>
+                        <li>법원 인지세: 3만원 내외</li>
+                        <li>법정 송달료: 채권자 수에 따라 가변 적용 (10개 사 기준 약 40만 ~ 50만원 수준)</li>
+                        <li>부채 증명서 대행 발급 수수료: 건당 1만원 내외</li>
+                    </ul>
+                </div>
+
+                <h2 id="age-strategy">연령대별 청주지역 맞춤형 개인회생 전략</h2>
+
+                <h4 id="age-20">20대 청년층: 주식, 가상화폐, 도박 실패 채무 완벽 극복</h4>
+                <p>현재 청주 상당구나 청원구 인근에 거주하는 많은 20대 청년들이 비트코인, 해외 주식 등의 손실로 사금융 대출에 시달리고 있습니다. 과거 청주지방법원은 이러한 투기성 부채 손실금을 청산가치에 반영시켜 변제금을 대폭 올리는 <strong>단점</strong>이 있었으나, 대전회생법원을 활용할 경우 단순 손실로 인정되어 파격적으로 낮은 납부 금액으로 면책 혜택을 챙길 수 있게 되었습니다.</p>
+
+                <h4 id="age-3040">30대 및 40대: 가장으로서 주거 재산 보존 및 최저생계비 추가 확보</h4>
+                <p>아이를 양육하고 있는 3040 가장들은 월세 보증금이나 주담대 아파트를 지키는 것이 <strong>가장</strong> 큰 과제입니다. 이 시기에는 배우자의 소득과 실제 공동 소유로 책정되어 있는 전세자금 등의 자산 평가가 매우 중요하므로 법무 대리인을 통해 정교한 서류 작업을 요구하는 컨설팅을 받는 것이 <strong>제일</strong> 안전합니다.</p>
+
+                <h4 id="age-5060">55세 이상 장노년층: 개인파산 제도와의 철저한 비교 판단</h4>
+                <p>나이가 많고 지속적인 노동 능력을 입증하기 힘들다면, 무리하게 개인회생을 신청하여 완주에 실패하는 것보다 아예 빚을 한 푼도 갚지 않고 한 번에 청산할 수 있는 개인파산 면책 제도가 더 나은 선택지일 수 있습니다. 본인의 연간 소득 가능성과 건강 지표를 신뢰할 수 있는 기관과 무료 <strong>상담</strong>받아 본인의 <strong>가입</strong> 방향성을 바르게 고르셔야 합니다.</p>
+
+                <h2 id="faq">청주개인회생과 관련된 솔직한 오해와 진실 (FAQ)</h2>
+
+                <h4>Q1. 인터넷 광고에서 선임료 현금지원이나 상품권을 준다는 곳은 안전한가요?</h4>
+                <p>절대로 현혹되어서는 안 됩니다. 최근 도산 법무 시장의 과열로 인해 일부 악성 법률 <strong>브랜드</strong>나 불법 보증 <strong>업체</strong>에서 백화점 <strong>상품</strong>이나 모바일 <strong>상품권</strong>, <strong>사은품</strong>, 허위 정부 <strong>지원금</strong>, 심지어 <strong>현금지원</strong>이나 유인 목적 <strong>이벤트</strong>를 내세워 무조건적 수임을 종용하고 있습니다. 이러한 영업 방식은 변호사법 위반 소지가 매우 높으며, 브로커가 대리 서류를 졸속으로 작성하여 중간에 도주할 경우 그 피해는 오롯이 신청인 개인이 떠안아야 합니다.</p>
+
+                <h4>Q2. 디시, 보배드림, 펨코 같은 대형 커뮤니티의 개인회생 성공 후기는 100퍼센트 진실인가요?</h4>
+                <p>그렇지 않습니다. <strong>디시</strong>인사이드나 <strong>보배드림</strong>, <strong>펨코</strong>, <strong>에펨코리아</strong> 등 유명 커뮤니티 공간에 게재되는 대다수의 <strong>내돈내산</strong> 성공 <strong>후기</strong> 글 사이사이에는 일반 유저를 가장하여 카카오톡 비밀상담 링크를 삽입하고 수임 수수료를 챙기려는 마케터들이 교묘하게 기생해 활동하고 있습니다. 온라인 상의 글은 정보 수집 차원에서 가볍게 가늠만 하시고, 정작 신뢰할 수 있는 곳을 고를 때는 대한변호사협회에 공식 등재된 도산 <strong>전문</strong> 자격이 있는지 여부를 꼼꼼하게 <strong>비교</strong>하고 가려내는 통찰이 필수입니다.</p>
+
+                <h4>Q3. 포털 검색과 최신 AI를 활용해 법률 지식을 얻는 현명한 노하우는 무엇인가요?</h4>
+                <p>정보 수집을 하실 때는 전통적인 <strong>네이버</strong>, <strong>구글</strong> 검색 데이터나 <strong>유튜브</strong> 영상, <strong>트위터</strong>나 <strong>인스타그램</strong>, <strong>페이스북</strong>의 요약 자료를 두루 참고하되, 교차 검증을 반드시 거쳐야 합니다. 특히 최근 트렌드인 구글 <strong>제미나이</strong>(Gemini), 오픈AI <strong>챗지피티</strong>(ChatGPT)와 같은 생성형 인공지능 <strong>AI</strong> 엔진을 이용해 기초적인 채무자 법적 조항이나 2026년 3월 개정된 대전회생법원의 관할구역 이관 규칙을 질의해 보면 변호사를 만나기 전 미리 강력한 사전 지식 체계를 완비하는 데 탁월한 효과를 볼 수 있습니다.</p>
+
+                <h2 id="conclusion">실패 없는 도약을 위한 2026년 청주개인회생 최종 점검 조언</h2>
+                <div class="highlight-box highlight-accent">
+                    <p>인생에서 가장 어두운 빚더미의 고비를 넘어 새로운 내일의 시작을 맞이하는 것은 결코 부끄러운 일이 아닙니다. 2026년에 출범한 영리한 다자간 법무 관할 선택권과 대폭 인상된 월 법정 최저생계비 혜택을 온전히 나만의 것으로 취하기 위해서는 적극적으로 정보를 비교하고 다이렉트 무료 컨설팅을 활용하시는 노력이 필요합니다. 수임료 일시납이 부담스럽다면 <strong>카카오톡</strong>이나 <strong>토스</strong> 등의 간편 결제 서비스를 통해 최장 12개월 분할 납부 할인 협의가 가능한 정직한 대행 업체를 신중히 추천받아 안전한 채무 탕감의 완주 길에 들어서기를 간절히 응원합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  
